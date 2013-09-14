@@ -17,6 +17,7 @@ jQuery.fn.scaleImageToParent = function(parentSelector) {
 
   if ('undefined' === typeof(parentSelector)) {
     parentSelector = 'div';
+  }
 
   var image = $(this);
   var parents = image.parents(parentSlector);
