@@ -20,7 +20,7 @@ jQuery.fn.scaleImageToParent = function(parentSelector) {
   }
 
   var image = $(this);
-  var parents = image.parents(parentSlector);
+  var parents = image.parents(parentSelector);
   if (1 > parents.length) {
     throw 'jquery-image-scale parent selector matched no elements: ' + 
         parentSelector;
