@@ -19,43 +19,55 @@ jQuery.fn.scaleImageToParent = function(parentSelector) {
     parentSelector = 'div';
   }
 
-  var image = $(this);
-  var parents = image.parents(parentSelector);
-  if (1 > parents.length) {
-    throw 'jquery-image-scale parent selector matched no elements: ' + 
-        parentSelector;
-  }
-  var container = $(parents[0]);
+  console.log(this);
 
-  var width = image.width();
-  var height = image.height();
-
-  // stage 1: resize in the width to ensure the width is covered.
-  if (width < container.width()) {
-    var scale = container.width() / width;
-    width = scale * width;
-    height = scale * height;
-  }
-
-  // stage 2: if the image is still too short scale up to height
-  if (height < container.height()) {
-    var scale = container.height() / height;
-    width = scale * width;
-    height = scale * height;
-  }
-
-  width = Math.floor(width);
-  height = Math.floor(height);
-
-  // stage 3: determine the left offset to center the image horizontally
-  var leftAlign = width - container.width() / -2;
-  var topAlign = height - container.height() / -2;
-
-  // write the image css
-  image.css('width', width);
-  image.css('height', height);
-  image.css('margin-left', leftAlign);
-  image.css('margin-top', topAlign);
+  this.each(function() { 
   
+    var image = $(this);
+    console.log(this);
+    var parents = image.parents(parentSelector);
+    if (1 > parents.length) {
+      throw 'jquery-image-scale parent selector matched no elements: ' + 
+          parentSelector;
+    }
+    var container = $(parents[0]);
+    console.log('Container ' + container.width() + ' x ' + container.height());
+
+    var width = image.width();
+    var height = image.height();
+
+    // stage 1: resize in the width to ensure the width is covered.
+    if (width < container.width()) {
+      var scale = container.width() / width;
+      width = scale * width;
+      height = scale * height;
+    }
+
+    // stage 2: if the image is still too short scale up to height
+    if (height < container.height()) {
+      var scale = container.height() / height;
+      width = scale * width;
+      height = scale * height;
+    }
+
+    width = Math.floor(width);
+    height = Math.floor(height);
+
+    console.log('ImageScaled ' + width + ' x ' + height);
+
+    // stage 3: determine the left offset to center the image horizontally
+    var leftAlign = - Math.floor((width - container.width()) / 2);
+    var topAlign = - Math.floor((height - container.height()) / 2);
+
+    console.log('Align ' + leftAlign + ' x ' + topAlign);
+
+    // write the image css
+    image.css('width', width);
+    image.css('height', height);
+    image.css('margin-left', leftAlign);
+    image.css('margin-top', topAlign);
+  
+  });
+
   return this;
 }
