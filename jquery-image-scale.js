@@ -74,7 +74,5 @@ if (typeof jQuery == 'undefined') {
       });
       image.load();
     });
-
-    return this;
   }
 })(jQuery);
